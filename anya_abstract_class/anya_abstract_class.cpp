@@ -1,20 +1,121 @@
-﻿// anya_abstract_class.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include<iostream>
+#include<cmath>
+using namespace std;
 
-#include <iostream>
+class Figure
+{
+public:
+    virtual double getSquare() = 0;
+    virtual double getPerimeter() = 0;
+    virtual void showFigureType() = 0;
+};
+
+class Rectangle : public Figure
+{
+ 
+private:
+    double width;
+    double height;
+
+public:
+    Rectangle(double w, double h) : width(w), height(h){}
+
+    double getSquare() override
+    {
+        return (width * height);
+    }
+    double getPerimeter() override
+    {
+        return (width * 2 + height * 2);
+    }
+    void showFigureType()
+    {
+        cout << "Rectangle "<< "width = " << width << "height = "<< height << endl;
+        cout << "perimetr = " << getPerimeter() << endl;
+        cout << "space = " << getSquare() << endl;
+    }
+    void get_size()
+    {
+        cout << "vvedite storony pruamoug" << endl;
+        cin >> width >> height;
+    }
+};
+class Circle : public Figure
+{
+
+private:
+    double radius;
+
+public:
+
+    Circle(double r) : radius(r) {}
+
+    double getSquare() override
+    {
+        return (pow(radius, 2) * 3.14);
+    }
+    double getPerimeter() override
+    {
+        return (2 * 3.14 * radius);
+    }
+    void showFigureType()
+    {
+        cout << "Circle " << "radius = " << radius << endl;
+        cout << "perimetr = " << getPerimeter() << endl;
+        cout << "space = " << getSquare() << endl;
+
+    }
+    void get_size()
+    {
+        cout << "vvedite rad cryga" << endl;
+        cin >> radius;
+    }
+
+
+};
+class Triangle : public Figure
+{
+private:
+    double a;
+    double b;
+    double c;
+public:
+    Triangle (double a,double b,double c) : a(a), b(b), c(c){}
+    double getSquare() override
+    {
+        return (sqrt((getPerimeter() / 2) * (getPerimeter() / 2 - a) * (getPerimeter() / 2 - b) * (getPerimeter() / 2 - c)));
+    }
+    double getPerimeter() override
+    {
+        return (a + b + c);
+    }
+    void showFigureType()
+    {
+        cout << "TRiangle " << "a, b, c = " << a << "," << b << "," << c << endl;
+        cout << "perimetr = " << getPerimeter() << endl;
+        cout << "space = " << getSquare() << endl;
+    }
+    void get_size()
+    {
+        cout << "vvedite storony treyg" << endl;
+        cin >> a >> b >> c;
+    }
+
+};
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    double r, a, b;
+    
+    Rectangle pram(1,1);
+    Circle kryg(1);
+    Triangle tri(1,1,1);
+
+    pram.get_size();
+    kryg.get_size();
+    tri.get_size();
+    pram.showFigureType();
+    kryg.showFigureType();
+    tri.showFigureType();
+    return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
